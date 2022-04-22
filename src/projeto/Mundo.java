@@ -71,12 +71,10 @@ public class Mundo {
             if(i < 100){
                 PessoaSaudavel p = new PessoaSaudavel(Y, X, 0);
                 pessoas[i] = p;
-                safe++;
             }
             else{
                 PessoaDoente p = new PessoaDoente(Y, X, 0);
                 pessoas[i] = p;
-                infect++;
             } 
             Y = pessoas[i].getY(); 
             X = pessoas[i].getX();
@@ -97,8 +95,6 @@ public class Mundo {
                int p = ((PessoaDoente)pessoas[i]).getTime();
                if(p == 15){
                     pessoas[i] = new Zumbi(Y, X, 4);
-                    infect--;
-                    zomb++;
                } 
             }
             if(tipo.equals("Zumbi")){
@@ -106,8 +102,6 @@ public class Mundo {
                 if(z == 60){
                     pessoas[i] = new PessoaMorta(Y, X, 7);
                     mapa_original[Y][X] = 7;
-                    zomb--;
-                    dead++;
                 }
             }
             mapa[Y][X] = mapa_original[Y][X];
@@ -118,8 +112,6 @@ public class Mundo {
                         v.setY(Y);
                         if(v.infect(mapa)){
                             pessoas[i] = new PessoaDoente(Y, X, 3);
-                            infect++;
-                            safe--;
                         }
                         pessoas[i].setY(Y);
                         mapa[Y][X] = cor;
@@ -129,8 +121,6 @@ public class Mundo {
                         v.setY(Y);
                         if(v.infect(mapa)){
                             pessoas[i] = new PessoaDoente(Y, X, 3);
-                            infect++;
-                            safe--;
                         }
                         pessoas[i].setY(Y);
                         mapa[Y][X] = cor;
@@ -140,8 +130,6 @@ public class Mundo {
                         v.setX(X);
                         if(v.infect(mapa)){
                             pessoas[i] = new PessoaDoente(Y, X, 3);
-                            infect++;
-                            safe--;
                         }
                         pessoas[i].setX(X);
                         mapa[Y][X] = cor;
@@ -151,8 +139,6 @@ public class Mundo {
                         v.setX(X);
                         if(v.infect(mapa)){
                             pessoas[i] = new PessoaDoente(Y, X, 3);
-                            infect++;
-                            safe--;
                         }
                         pessoas[i].setX(X);
                         mapa[Y][X] = cor;
@@ -164,8 +150,6 @@ public class Mundo {
                     Y = ((PessoaDoente)pessoas[i]).MoveUp(Y);
                     if(H1.ocupacao(mapa, Y, X) == 1 || H2.ocupacao(mapa, Y, X) == 1 || H3.ocupacao(mapa, Y, X) == 1 ||
                        H1.ocupacao(mapa, Y, X) == 2 || H2.ocupacao(mapa, Y, X) == 2 || H3.ocupacao(mapa, Y, X) == 2){
-                        infect--;
-                        safe++;
                         pessoas[i] = new PessoaSaudavel(Y, X, 0);
                     }
                     pessoas[i].setY(Y);
@@ -175,8 +159,6 @@ public class Mundo {
                     Y = ((PessoaDoente)pessoas[i]).MoveDown(Y);
                     if(H1.ocupacao(mapa, Y, X) == 1 || H2.ocupacao(mapa, Y, X) == 1 || H3.ocupacao(mapa, Y, X) == 1 ||
                        H1.ocupacao(mapa, Y, X) == 2 || H2.ocupacao(mapa, Y, X) == 2 || H3.ocupacao(mapa, Y, X) == 2){
-                        infect--;
-                        safe++;
                         pessoas[i] = new PessoaSaudavel(Y, X, 0);
                     }
                     pessoas[i].setY(Y);
@@ -186,8 +168,6 @@ public class Mundo {
                     X = ((PessoaDoente)pessoas[i]).MoveLeft(X);
                     if(H1.ocupacao(mapa, Y, X) == 1 || H2.ocupacao(mapa, Y, X) == 1 || H3.ocupacao(mapa, Y, X) == 1 ||
                        H1.ocupacao(mapa, Y, X) == 2 || H2.ocupacao(mapa, Y, X) == 2 || H3.ocupacao(mapa, Y, X) == 2){
-                        infect--;
-                        safe++;
                         pessoas[i] = new PessoaSaudavel(Y, X, 0);
                     }
                     pessoas[i].setX(X);
@@ -197,8 +177,6 @@ public class Mundo {
                     X = ((PessoaDoente)pessoas[i]).MoveRight(X);
                     if(H1.ocupacao(mapa, Y, X) == 1 || H2.ocupacao(mapa, Y, X) == 1 || H3.ocupacao(mapa, Y, X) == 1 ||
                        H1.ocupacao(mapa, Y, X) == 2 || H2.ocupacao(mapa, Y, X) == 2 || H3.ocupacao(mapa, Y, X) == 2){
-                        infect--;
-                        safe++;
                         pessoas[i] = new PessoaSaudavel(Y, X, 0);
                     }
                     pessoas[i].setX(X);
@@ -210,8 +188,6 @@ public class Mundo {
                     case 1:
                         Y = ((PessoaDoente)pessoas[i]).MoveUp(Y);
                         if(H1.ocupacao(mapa, Y, X) == 2 || H2.ocupacao(mapa, Y, X) == 2 || H3.ocupacao(mapa, Y, X) == 2){
-                            safe++;
-                            zomb--;
                             pessoas[i] = new PessoaSaudavel(Y, X, 0);
                         }
                         pessoas[i].setY(Y);
@@ -220,8 +196,6 @@ public class Mundo {
                     case 2:
                         Y = ((PessoaDoente)pessoas[i]).MoveDown(Y);
                         if(H1.ocupacao(mapa, Y, X) == 2 || H2.ocupacao(mapa, Y, X) == 2 || H3.ocupacao(mapa, Y, X) == 2){
-                            safe++;
-                            zomb--;
                             pessoas[i] = new PessoaSaudavel(Y, X, 0);
                         }
                         pessoas[i].setY(Y);
@@ -230,8 +204,6 @@ public class Mundo {
                     case 3:
                         X = ((PessoaDoente)pessoas[i]).MoveLeft(X);
                         if(H1.ocupacao(mapa, Y, X) == 2 || H2.ocupacao(mapa, Y, X) == 2 || H3.ocupacao(mapa, Y, X) == 2){
-                            safe++;
-                            zomb--;
                             pessoas[i] = new PessoaSaudavel(Y, X, 0);
                         }
                         pessoas[i].setX(X);
@@ -240,8 +212,6 @@ public class Mundo {
                     case 4:
                         X = ((PessoaDoente)pessoas[i]).MoveRight(X);
                         if(H1.ocupacao(mapa, Y, X) == 2 || H2.ocupacao(mapa, Y, X) == 2 || H3.ocupacao(mapa, Y, X) == 2){
-                            safe++;
-                            zomb--;
                             pessoas[i] = new PessoaSaudavel(Y, X, 0);
                         }
                         pessoas[i].setX(X);
@@ -249,6 +219,25 @@ public class Mundo {
                         break;
                 }
                      
+            }
+        }
+        safe = 0;
+        infect = 0;
+        zomb = 0;
+        dead = 0;
+        for(int i = 0; i < 102; i++){
+            String tipo = pessoas[i].getClass().getSimpleName();
+            if(tipo.equals("PessoaSaudavel")){
+                safe++;
+            }
+            if(tipo.equals("PessoaDoente")){
+                infect++;
+            }
+            if(tipo.equals("Zumbi")){
+                zomb++;
+            }
+            if(tipo.equals("PessoaMorta")){
+                dead++;
             }
         }
     }
